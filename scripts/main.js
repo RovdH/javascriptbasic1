@@ -42,7 +42,7 @@ const departments = {
                 description: "Een accountmanager richt zich op het beheren en uitbreiden van relaties met bestaande klanten. Ze werken nauw samen met klanten om hun zakelijke behoeften te begrijpen, oplossingen voor te stellen en aanvullende producten of diensten te verkopen. Accountmanagers onderhouden regelmatig contact met klanten, pakken eventuele zorgen of problemen aan en streven naar klanttevredenheid en behoud."
             },
             {
-                title: "Business Development Manager",
+                title: "Open sollicitatie. Per Ongeluk Verwijderd",
                 description: "Een business development manager identificeert en volgt kansen voor bedrijfsgroei en uitbreiding. Ze onderzoeken en analyseren markttrends, identificeren potentiële partnerschappen of allianties en ontwikkelen strategieën om nieuwe markten of klantsegmenten te betreden. Business development managers nemen ook deel aan netwerkactiviteiten, bezoeken brancheevenementen en onderhandelen over strategische partnerschappen of contracten om de omzetgroei te stimuleren."
             }
         ]
@@ -70,5 +70,32 @@ const departments = {
         ],
     }
 }
-
 console.log(departments);
+console.log("De afdeling Sales heeft", departments.sales.numberOfEmployees, "medewerkers");
+console.log("Marketing is een leuke afdeling om te werken.", departments.marketing.description);
+console.log("De afdeling Customer Service heeft", departments["customer-service"].numberOfEmployees, "medewerkers");
+console.log("Sales is een uitdagende afdeling om te werken als Verkoopmanager.", departments.sales.jobs[1].description);
+
+const userInput = prompt("Over welke afdeling wil je meer informatie? \nKies uit: [marketing / sales / customer-service]");
+const userInput2 = prompt("Je koos " + userInput + " Over welke functie wil je meer weten? Voer een getal tussen 0 en 3 in.\n0: " + departments[userInput].jobs[0].title + "\n1: " + departments[userInput].jobs[1].title + "\n2: " + departments[userInput].jobs[2].title + "\n3: " + departments[userInput].jobs[3].title);
+switch (userInput) {
+    case 'marketing':
+    case 'sales':
+    case 'customer-service':
+        console.log(userInput, "is een leuke afdeling om te werken. Er werken op dit moment", departments[userInput].numberOfEmployees, "medewerkers.");
+        switch (userInput2) {
+            case "0":
+            case "1":
+            case "2":
+            case "3":
+                console.log("Je koos " + departments[userInput].jobs[userInput2].title + " Een uitdagende rol! " + departments[userInput].jobs[userInput2].description);
+                break;
+
+            default:
+                console.log('Ongeldige keuze');
+                document.getElementById('error-message').textContent = "Ongeldige keuze. Probeer het opnieuw door de pagina te verversen.";
+        }
+}
+document.getElementById('role-title').textContent = departments[userInput].jobs[userInput2].title;
+document.getElementById('department-description').textContent = departments[userInput].description;
+document.getElementById('role-description').textContent = departments[userInput].jobs[userInput2].description;
